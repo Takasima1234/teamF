@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品購入 | DeckLab</title>
+  <link rel="stylesheet" href="KOU/KOUstyle.css">
+</head>
+<body>
+  <header class="header">
+    <img src="../logo/TOPlogo.png" alt="DeckLab" class="logo">
+    <div class="header-right">
+      <a href="#" class="cart">🛒</a>
+      <div class="user-links">
+        <a href="#">ログイン・登録</a><br>
+        <a href="#">マイページ</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>商品購入</h1>
+
+    <section class="user-info">
+      <h2>電話番号・メールアドレス</h2>
+      <div class="info-box">
+        <div>
+          <p>0120-371-007</p>
+          <p>amandamorgan@example.com</p>
+        </div>
+        <button class="edit-btn">✎</button>
+      </div>
+    </section>
+
+    <section class="product-section">
+      <div class="section-header">
+        <h2>商品 <span class="count">2</span></h2>
+        <a href="#" class="add-link">追加する</a>
+      </div>
+
+      <!-- 商品1 -->
+      <div class="product-item">
+        <img src="../gazou/gekkouga.jpg" alt="商品画像">
+        <div class="product-info">
+          <input type="number" class="qty-input" value="1" min="1">
+          <div>
+            <p>商品名：ゲッコウガ</p>
+            <p class="price" data-price="1700">¥1,700円</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 商品2 -->
+      <div class="product-item">
+        <img src="../gazou/jarouda_sar.jpg" alt="商品画像">
+        <div class="product-info">
+          <input type="number" class="qty-input" value="1" min="1">
+          <div>
+            <p>商品名：ジャローダ</p>
+            <p class="price" data-price="1700">¥1,700円</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shipping">
+      <h2>配送料金</h2>
+      <ul>
+        <li>送料 200円</li>
+        <li>3000円かつ2点以上のご購入で送料無料</li>
+      </ul>
+    </section>
+
+    <section class="payment">
+      <h2>クレジットの追加</h2>
+      <div class="info-box">
+        <a href="#" class="card-link">カード</a>
+        <button class="edit-btn">✎</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="total">
+        <p>合計 <span id="total-amount">¥3,400円</span></p>
+      </div>
+      <button class="buy-btn">購入</button>
+    </footer>
+  </main>
+
+  <!-- ✅ 外部JavaScript読み込み -->
+  <script src="KOU/KOUscript.js"></script>
+</body>
+</html>
