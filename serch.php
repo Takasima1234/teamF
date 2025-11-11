@@ -1,5 +1,5 @@
 <?php
-// --- DB接続設定（新しいロリポップ設定） ---
+// --- DB接続設定（ロリポップ新設定） ---
 const SERVER = 'mysql323.phy.lolipop.lan';
 const DBNAME = 'LAA1607659-php';
 const USER = 'LAA1607659';
@@ -19,11 +19,11 @@ $rarity   = isset($_GET['rarity'])   ? trim($_GET['rarity'])   : '';
 $series   = isset($_GET['series'])   ? trim($_GET['series'])   : '';
 
 // --- SQL組み立て（部分一致検索） ---
-$sql = "SELECT * FROM cards WHERE 1";
+$sql = "SELECT card_name, category, rarity, title, url FROM product_pro WHERE 1";
 $params = [];
 
 if ($name !== '') {
-    $sql .= " AND name LIKE ?";
+    $sql .= " AND card_name LIKE ?";
     $params[] = "%{$name}%";
 }
 if ($category !== '' && $category !== '分類') {
@@ -35,7 +35,7 @@ if ($rarity !== '' && $rarity !== 'レアリティ') {
     $params[] = "%{$rarity}%";
 }
 if ($series !== '' && $series !== 'シリーズ') {
-    $sql .= " AND series LIKE ?";
+    $sql .= " AND title LIKE ?";
     $params[] = "%{$series}%";
 }
 
@@ -226,8 +226,8 @@ try {
             echo '<div style="color:#666; text-align:center; width:100%;">該当するカードが見つかりません。</div>';
         } else {
             foreach ($cards as $c) {
-                $img = htmlspecialchars($c['image_path']);
-                $title = htmlspecialchars($c['name']);
+                $img = htmlspecialchars($c['url']);
+                $title = htmlspecialchars($c['card_name']);
                 echo '<div class="card">';
                 echo    '<img src="' . $img . '" alt="' . $title . '">';
                 echo    '<div>' . $title . '</div>';

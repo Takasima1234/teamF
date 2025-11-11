@@ -15,15 +15,10 @@ try {
 }
 
 // ==============================
-// カート情報取得
+// 商品情報取得（product_proテーブル）
 // ==============================
-// cartテーブル: id, card_id, quantity
-// cardsテーブル: id, name, condition, price, stock, image_path
-
-$sql = "SELECT c.id AS cart_id, c.quantity, 
-               p.name, p.condition, p.price, p.stock, p.image_path
-        FROM cart AS c
-        JOIN cards AS p ON c.card_id = p.id";
+$sql = "SELECT model_number, card_name, status, price, quantity, url 
+        FROM product_pro";
 $stmt = $pdo->query($sql);
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -33,7 +28,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>カート - DeckLab</title>
+  <title>商品一覧 - DeckLab</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -208,27 +203,22 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </header>
 
   <main>
-    <h1>カート</h1>
+    <h1>商品一覧</h1>
 
     <?php if (empty($items)): ?>
-      <p>カートに商品がありません。</p>
+      <p>商品が登録されていません。</p>
     <?php else: ?>
       <?php $index = 1; ?>
       <?php foreach ($items as $item): ?>
         <h3><?= $index ?>点目</h3>
         <div class="item">
-          <img src="<?= htmlspecialchars($item['image_path']) ?>" alt="カード画像">
+          <img src="<?= htmlspecialchars($item['url']) ?>" alt="カード画像">
           <div class="item-info">
-            <p><strong><?= htmlspecialchars($item['name']) ?></strong></p>
-            <p>状態：<?= htmlspecialchars($item['condition']) ?></p>
+            <p><strong><?= htmlspecialchars($item['card_name']) ?></strong></p>
+            <p>型番：<?= htmlspecialchars($item['model_number']) ?></p>
+            <p>状態：<?= htmlspecialchars($item['status']) ?></p>
             <p>価格：¥ <?= number_format($item['price']) ?></p>
-            <p>在庫数：<?= htmlspecialchars($item['stock']) ?></p>
-            <div class="item-actions">
-              <button class="delete-btn">🗑️</button>
-              <button>-</button>
-              <span><?= htmlspecialchars($item['quantity']) ?></span>
-              <button>+</button>
-            </div>
+            <p>在庫数：<?= htmlspecialchars($item['quantity']) ?></p>
           </div>
         </div>
         <?php $index++; ?>

@@ -12,10 +12,8 @@ try {
   die("DB接続に失敗しました: " . $e->getMessage());
 }
 
-// ===== 販売履歴を取得 =====
-// テーブル名が "sales_history" で存在するか確認してください。
-// 存在しない場合は "sales" や "orders" に変更。
-$sql = "SELECT * FROM sales_history ORDER BY date DESC";
+// ===== 販売履歴を取得（log_proテーブルから） =====
+$sql = "SELECT purchase_date, price, model_number FROM log_pro ORDER BY purchase_date DESC";
 $stmt = $pdo->query($sql);
 $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -127,9 +125,9 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <?php if (count($sales) > 0): ?>
         <?php foreach ($sales as $row): ?>
           <tr>
-            <td><?= htmlspecialchars($row['date']) ?></td>
+            <td><?= htmlspecialchars($row['purchase_date']) ?></td>
             <td><?= htmlspecialchars(number_format($row['price'])) ?></td>
-            <td><?= htmlspecialchars($row['product_code']) ?></td>
+            <td><?= htmlspecialchars($row['model_number']) ?></td>
           </tr>
         <?php endforeach; ?>
       <?php else: ?>
